@@ -1,0 +1,14 @@
+[
+  {
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+      "username": "nick-admin",
+      "password": "pbkdf2_sha256$600000$PVU8QD8PEQBTphZd1mD4Pn$PVWg6CNp+xcoT1ht0msPS/jHdEJ0uSf228l/EaU4SZE=",
+      "email": "a@a.com",
+      "is_superuser": true,
+      "is_staff": true,
+      "is_active": true
+    }
+  }
+]

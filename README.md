@@ -95,7 +95,8 @@ Ideal Fields
 - уникальным в рамках всей структуры базы данных
 
 
-
+TDD - that's how I gonna to build the project 
+![db_design.png](imgs%tdd_methodolgy.png)
 
 
 
