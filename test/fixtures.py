@@ -15,7 +15,7 @@ from django.core.management import call_command  # this allows to execute some c
 def django_db_setup_fixture(django_db_setup, django_db_blocker):
     """
     Load DB data fixtures
-    :param django_db_setup: гарантирует что тест_бд создана и доступна
+    :param django_db_setup: гарантирует что тест_бд будет создана и доступна
     :param django_db_blocker: нужно что б заброкировать/разблокировать записть/чтение в бд
     :return:
     """

@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 # 2.def also should start with test%
 # 3. in pytest.ini we can manage this names
 
+
 # 4.mark - маркировка, selenium - метадата из pytest.ini. Маркировка позволяет отфильтровать выьзов тестов.
 # Нужно что б различать запуск тестов.
 # selenium - импользование фикстуры(то что вызывается ПЕРЕД а) с pytest.ini -> conftest -> test.selenium -> позволит нам не запускать драйвер
@@ -20,6 +21,7 @@ from django.contrib.auth.models import User
 #     """
 #     assert create_admin_user.__str__() == "nick-admin"
 
+# mark - означает что я собираюсь разделить выполнение тестов
 
 @pytest.mark.selenium
 def test_dashboard_admin_login(live_server, django_db_setup_fixture,  chrome_browser_instance):

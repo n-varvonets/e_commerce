@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # local apps
     'dashboard',
+    'inventory',
+    # external apps
+    "mptt",
 ]
 
 MIDDLEWARE = [
