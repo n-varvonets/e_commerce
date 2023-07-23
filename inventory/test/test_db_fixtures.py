@@ -10,7 +10,7 @@ from inventory import models
     "id, name, slug, is_active",
     [
         (1, "fashion", "fashion", 1),
-        (14, "trainers", "trainers", 0),
+        (18, "trainers", "trainers", 0),
         (35, "football", "football", 1),
     ],
 )  # нужно определить данные или таблицу

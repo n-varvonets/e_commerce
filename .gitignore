@@ -128,6 +128,8 @@ dmypy.json
 # Pyre type checker
 .pyre/
 /.idea
+# untracked romote tracked files for .gitignore
+#git rm -r --cached .idea/
 
 
 dropship/static

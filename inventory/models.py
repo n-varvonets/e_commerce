@@ -7,6 +7,8 @@ class Category(MPTTModel):
     """
     Inventory Category table implemented with MPTT
     MPTT - єто техника(пакет) для хранения иерархических данных в бд
+
+    manage.py dumpdata inventory.category > category_dump.json for fixtures.db_category_fixture.json
     """
     name = models.CharField(
         max_length=100,
@@ -24,9 +26,9 @@ class Category(MPTTModel):
         verbose_name=_("category safe URL"),
         help_text=_("format: required, letters, number, underscore, or hyphens")
     )
-    # is_active - models.BooleanField(
-    #     default=False,
-    # )
+    is_active = models.BooleanField(
+        default=False,
+    )
     parent = TreeForeignKey(
         "self",
         on_delete=models.PROTECT,

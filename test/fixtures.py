@@ -21,4 +21,5 @@ def django_db_setup_fixture(django_db_setup, django_db_blocker):
     """
     with django_db_blocker.unblock():
         call_command("loaddata", "/Users/nick-v/PycharmProjects/e_commerce/dashboard/fixtures/db_admin_fixture.json")  # как в терминале запуск команды для загрузки хардкодной бд
+        call_command("loaddata", "/Users/nick-v/PycharmProjects/e_commerce/inventory/fixtures/db_category_fixture.json")
 
