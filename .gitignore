@@ -126,8 +126,10 @@ venv.bak/
 dmypy.json
 
 # Pyre type checker
-.pyre/
+.pyre/ls
+
 /.idea
+.idea
 # untracked romote tracked files for .gitignore
 #git rm -r --cached .idea/
 
