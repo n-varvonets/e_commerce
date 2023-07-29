@@ -6,7 +6,7 @@
       "name": "fashion",
       "slug": "fashion",
       "parent": null,
-      "is_active": true,
+      "is_active": false,
       "lft": 1,
       "rght": 70,
       "tree_id": 1,

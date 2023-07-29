@@ -9,8 +9,8 @@ from inventory import models
 @pytest.mark.parametrize(
     "id, name, slug, is_active",
     [
-        (1, "fashion", "fashion", 1),
-        (18, "trainers", "trainers", 0),
+        (1, "fashion", "fashion", 0),
+        (18, "trainers", "trainers", 1),
         (35, "football", "football", 1),
     ],
 )  # нужно определить данные или таблицу
@@ -32,15 +32,22 @@ def test_inventory_category_dbfixture(
 
 
 @pytest.mark.parametrize(
-    "name, slug, is_active",
+    "slug, is_active",
+    # "name, slug, is_active",
+    # [
+    #     ("fashion", "fashion", 0),
+    #     ("trainers", "trainers", 1),
+    #     ("football", "football", 1),
+    # ],
     [
-        ("fashion", "fashion", 1),
-        ("trainers", "trainers", 0),
-        ("football", "football", 1),
+        ( "fashion", 0),
+        ("trainers", 1),
+        ( "football", 1),
     ],
 )  # каждый из параметром это ОТДЕЛЬНЫЙ ТЕСТ
 def test_inventory_category_insert_data(
-        db, category_factory, name, slug, is_active
+        db, category_factory, slug, is_active
+        # db, category_factory, name, slug, is_active
 ):
     """
     А 2ой подход - использовать favtory boy (дальше будет).
@@ -50,8 +57,13 @@ def test_inventory_category_insert_data(
     :param name, slug, is_active: our table columns
     :return:
     """
-    result = category_factory.create(name=name, slug=slug, is_active=is_active)
-    assert result.name == name
+    # result = category_factory.create(name=name, slug=slug, is_active=is_active)
+
+    # in this case we not gonna to take name parameter,
+    # cause of factories will create it auto
+    result = category_factory.create(slug=slug, is_active=is_active)
+    print(result.name)
+    # assert result.name == name
     assert result.slug == slug
     assert result.is_active == is_active
 

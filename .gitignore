@@ -132,23 +132,6 @@ dmypy.json
 #git rm -r --cached .idea/
 
 
-dropship/static
-dropship/media
-postgres_data
-.vscode
-dropship/media/country_flags/*
-.vscode/launch.json
-dropship/dropship/.env
-dropship/dropship/logs/*
-frontend/*
-dropship/translate_json/*
-dropship/dropship/dump/*
-dropship/dropship/logs/*
-dropship/dropship/logs/*/*
-dropship/dropship/logs/REQUESTS/REQUESTS.log
-dropship/dropship/logs/chargebee/chargebee.log
-init-letsencrypt.sh
-data/*
 
 **/.env_*
 **/*.log
