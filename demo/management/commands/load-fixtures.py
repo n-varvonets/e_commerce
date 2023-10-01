@@ -7,5 +7,6 @@ class Command(BaseCommand):
         call_command("migrate")
         call_command("loaddata", "/Users/nick-v/PycharmProjects/e_commerce/dashboard/fixtures/db_admin_fixture.json")
         call_command("loaddata", "/Users/nick-v/PycharmProjects/e_commerce/inventory/fixtures/db_category_fixture.json")
+        call_command("loaddata", "/Users/nick-v/PycharmProjects/e_commerce/inventory/fixtures/db_product_fixture.json")
 
 

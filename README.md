@@ -1,4 +1,4 @@
-'Project Brief
+Project Brief
 1. Online store capabilities selling various branded merchandise.
 2. Customer interactions - products comments / reviews
 3. Website keywords search form with robust search and filter functionality. (ES)
