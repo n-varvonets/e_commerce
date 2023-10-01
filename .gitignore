@@ -133,6 +133,8 @@ dmypy.json
 # untracked romote tracked files for .gitignore
 #git rm -r --cached .idea/
 
+# Ignore SonarLint files and directories
+.sonarlint/
 
 
 **/.env_*
