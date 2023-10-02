@@ -111,11 +111,13 @@ def test_inventory_db_product_dbfixture(
     assert result_created_at == created_at
     assert result_updated_at == updated_at
 
+
 def test_inventory_db_product_uniqueness_in_integrity(db, product_factory):
     """negative test on crush the web_id on uniqueness"""
     new_web_id = product_factory.create(web_id=123456789)  # here we created a one
     with pytest.raises(IntegrityError):
         product_factory.create(web_id=123456789)  # here we try to create more with same web_id - unique err
+
 
 @pytest.mark.dbfixture
 def test_inventory_db_product_insert_data(
@@ -129,7 +131,8 @@ def test_inventory_db_product_insert_data(
         -
     """
     # new_category = category_factory.create()
-    new_product = product_factory.create(category=(1, 11))  # передаем ids категорій к продукту с которым хотим заметчит его
+    new_product = product_factory.create(
+        category=(1, 11))  # передаем ids категорій к продукту с которым хотим заметчит его
     result_product_category = new_product.category.all()  # we find all categories associated with  new_product (1,36)
     print(result_product_category)  # <TreeQuerySet [<Category: fashion>, <Category: booties>]>
     assert "web_id_" in new_product.web_id
@@ -137,4 +140,119 @@ def test_inventory_db_product_insert_data(
     # python manage.py load-fixtures
 
 
+@pytest.mark.dbfixture
+@pytest.mark.parametrize(
+    "id, sku, upc, product_type, product, brand, is_active, retail_price, store_price, sale_price, weight, created_at, updated_at",
+    [
+        (
+                1,
+                "7633969397",
+                "934093051374",
+                1,
+                1,
+                1,
+                1,
+                97.00,
+                92.00,
+                46.00,
+                987,
+                "2021-09-04 22:14:18",
+                "2021-09-04 22:14:18",
+        ),
+        (
+                8616,
+                "3880741573",
+                "844935525855",
+                1,
+                8616,
+                1253,
+                1,
+                89.00,
+                84.00,
+                42.00,
+                929,
+                "2021-09-04 22:14:18",
+                "2021-09-04 22:14:18",
+        ),
+    ],
+)
+def test_inventory_db_produt_inventory_dataset(
+        db,
+        django_db_setup_fixture,  # django_db_setup,
+        id,
+        sku,
+        upc,
+        product_type,
+        product,
+        brand,
+        is_active,
+        retail_price,
+        store_price,
+        sale_price,
+        weight,
+        created_at,
+        updated_at
+):  # just matching data with data in db
+    result = models.ProductInventory.objects.get(id=id)
+    result_created_at = result.created_at.strftime("%Y-%m-%d %H:%M:%S")
+    result_updated_at = result.updated_at.strftime("%Y-%m-%d %H:%M:%S")
+    assert result.sku == sku
+    assert result.upc == upc
+    assert result.product_type.id == product_type
+    assert result.product.id == product
+    assert result.brand.id == brand
+    assert result.is_active == is_active
+    assert result.retail_price == retail_price
+    assert result.store_price == store_price
+    assert result.sale_price == sale_price
+    assert result.weight == weight
+    assert result_created_at == created_at
+    assert result_updated_at == updated_at
 
+
+def test_inventory_db_product_inventory_insert_data(
+        db, product_inventory_factory
+):  # db here's for access to DB(required)
+    new_product = product_inventory_factory.create(
+        sku="123456789",  # put a new value(special for Product inventory)
+        upc="123456789",  # put a new value(special for Product inventory)
+        product_type__name="new_name",  # overwrite  (in new model product_type)
+        product__web_id="123456789",  # overwrite (in new model product)
+        brand__name="new_name",  # overwrite (in new model brand)
+    )
+    assert new_product.sku == "123456789"
+    assert new_product.upc == "123456789"
+    assert new_product.product_type.name == "new_name"
+    assert new_product.product.web_id == "123456789"
+    assert new_product.brand.name == "new_name"
+    assert new_product.is_active == 1
+    assert new_product.retail_price == 97.00  # static
+    assert new_product.store_price == 92.00  # static
+    assert new_product.sale_price == 46.00  # static
+    assert new_product.weight == 987  # static
+
+
+def test_inventory_db_producttype_insert_data(db, product_type_factory):
+
+    new_type = product_type_factory.create(name="demo_type")
+    assert new_type.name == "demo_type"
+
+
+def test_inventory_db_producttype_uniqueness_integrity(
+    db, product_type_factory
+):
+    product_type_factory.create(name="not_unique")
+    with pytest.raises(IntegrityError):
+        product_type_factory.create(name="not_unique")
+
+
+def test_inventory_db_brand_insert_data(db, brand_factory):
+
+    new_brand = brand_factory.create(name="demo_brand")
+    assert new_brand.name == "demo_brand"
+
+
+def test_inventory_db_brand_uniqueness_integrity(db, brand_factory):
+    brand_factory.create(name="not_unique")
+    with pytest.raises(IntegrityError):
+        brand_factory.create(name="not_unique")

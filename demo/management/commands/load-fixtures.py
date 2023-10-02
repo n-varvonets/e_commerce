@@ -9,4 +9,10 @@ class Command(BaseCommand):
         call_command("loaddata", "/Users/nick-v/PycharmProjects/e_commerce/inventory/fixtures/db_category_fixture.json")
         call_command("loaddata", "/Users/nick-v/PycharmProjects/e_commerce/inventory/fixtures/db_product_fixture.json")
 
+        # порядок имеет значение
+        call_command("loaddata", "/Users/nick-v/PycharmProjects/e_commerce/inventory/fixtures/db_brand_fixture.json")
+        call_command("loaddata", "/Users/nick-v/PycharmProjects/e_commerce/inventory/fixtures/db_type_fixture.json")
+        call_command("loaddata", "/Users/nick-v/PycharmProjects/e_commerce/inventory/fixtures/db_product_inventory_fixture.json")
+
+
 

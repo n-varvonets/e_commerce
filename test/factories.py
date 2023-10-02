@@ -27,11 +27,9 @@ class CategoryFactory(factory.django.DjangoModelFactory):
     name = factory.Sequence(lambda n: "category_slug_%d" % n)  # cat_slug_0 > cat_slug_1
 
 
-register(CategoryFactory)
-
-
 class ProductFactory(factory.django.DjangoModelFactory):
     """make factory by ablog of category"""
+
     class Meta:
         model = models.Product
 
@@ -44,7 +42,8 @@ class ProductFactory(factory.django.DjangoModelFactory):
     updated_at = "2022-01-01 14:18:33"
 
     @factory.post_generation
-    def category(self, create, extracted, **kwargs):  # product_factory.create(category=(1, 36,)) from test_db_fixtures.py
+    def category(self, create, extracted,
+                 **kwargs):  # product_factory.create(category=(1, 36,)) from test_db_fixtures.py
         """
         нужно законектить при создание нового продукта к категории (ипользуя post_generation, как сигнал)
 
@@ -68,12 +67,46 @@ class ProductFactory(factory.django.DjangoModelFactory):
             return  # if we don't create any data - we don't need do anything
 
         if extracted:  # if pass over some categries we want to add
-            for category in extracted: # wee will add catagry that was passed into the func
-                 self.category.add(category)
-                
+            for category in extracted:  # wee will add catagry that was passed into the func
+                self.category.add(category)
+
         # path = extracted or os.path.join('/tmp/mbox/', self.login)
         # os.path.makedirs(path)
 
 
-register(ProductFactory)
+class ProductTypeFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = models.ProductType
 
+    name = factory.Sequence(lambda n: "type_%d" % n)
+
+
+class BrandFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = models.Brand
+
+    name = factory.Sequence(lambda n: "brand_%d" % n)
+
+
+class ProductInventoryFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = models.ProductInventory
+
+    sku = factory.Sequence(lambda n: "sku_%d" % n)
+    upc = factory.Sequence(lambda n: "upc_%d" % n)
+    product_type = factory.SubFactory(ProductTypeFactory)  # create a link
+    product = factory.SubFactory(ProductFactory)  # create a link
+    brand = factory.SubFactory(BrandFactory)  # create a link
+    is_active = 1
+    retail_price = 97
+    store_price = 92
+    sale_price = 46
+    weight = 987
+
+
+register(CategoryFactory)
+register(ProductFactory)
+register(ProductTypeFactory)
+register(BrandFactory)
+register(ProductInventoryFactory)
+register(ProductFactory)
